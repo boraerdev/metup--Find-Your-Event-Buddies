@@ -100,6 +100,9 @@ extension AddPageView {
         
         Button {
             self.uploadClicked()
+            if !addVm.anyError{
+                presentationMode.wrappedValue.dismiss()
+            }
         } label: {
             HStack{
                 Image(systemName: "plus")
@@ -115,7 +118,9 @@ extension AddPageView {
             )
             .padding(30)
             .foregroundColor(.accentColor)
-            
+            .alert(isPresented: $addVm.anyError) {
+                Alert(title: Text("Hata"), message: Text("Bir şey oldu."), dismissButton: Alert.Button.default(Text("OK")))
+            }
         }
 
         

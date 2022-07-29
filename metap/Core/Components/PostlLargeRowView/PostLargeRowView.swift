@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct PostLargeRowView: View {
+    var post: Post
     var body: some View {
         VStack(alignment: .leading){
             NavigationLink {
-                PostDetailView().navigationBarHidden(true)
+                PostDetailView(post: post).navigationBarHidden(true)
             } label: {
                 GroupBox(){
                     TabView{
@@ -19,16 +20,26 @@ struct PostLargeRowView: View {
                             HStack{
                                 VStack{
                                     titleDesc
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                     infoHstack
                                     SubCapsule(messageButton: true, title: "Bora Erdem", image: "bubble.left.and.bubble.right")
                                 }
                             }
                         }
                         HStack{
-                            Image("placeholderPhoto")
-                                .resizable()
-                                .cornerRadius(20)
-                                .scaledToFill()
+                            
+                            AsyncImage(url: URL(string: post.imageUrl)) { image in
+                                image
+                                    .resizable()
+                                    .cornerRadius(20)
+                                    .scaledToFill()
+
+                            } placeholder: {
+                                ProgressView()
+                            }
+
+                            
+                            
                                 
                         }
                     }
@@ -46,11 +57,11 @@ struct PostLargeRowView: View {
     }
 }
 
-struct PostLargeRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostLargeRowView()
-    }
-}
+//struct PostLargeRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PostLargeRowView()
+//    }
+//}
 
 
 
@@ -59,9 +70,9 @@ extension PostLargeRowView {
         VStack {
             HStack{
                 HStack {
-                    SubCapsule(title: "2-3", image: "person")
-                    SubCapsule(title: "İki Saat", image: "clock")
-                    SubCapsule(title: "Alsancak", image: "map")
+                    SubCapsule(title: String(post.kacKisilik), image: "person")
+                    SubCapsule(title: String(post.kacSaatIcinde), image: "clock")
+                    SubCapsule(title: String(post.etkinlikAdresi), image: "map")
                 }
             }
 
@@ -70,10 +81,12 @@ extension PostLargeRowView {
     
     private var titleDesc: some View {
         VStack(alignment: .leading, spacing: 5){
-            Text("Alsancak partka buluşmak lazım")
+            Text(post.etkinlikAdi)
+                .multilineTextAlignment(.leading)
                 .lineLimit(1)
                 .font(.title3)
-            Text("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of")
+            Text(post.etkinlikAciklamasi)
+                .multilineTextAlignment(.leading)
                 .lineLimit(2)
                 .font(.subheadline)
                 .foregroundColor(.secondary)

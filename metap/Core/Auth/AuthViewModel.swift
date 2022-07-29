@@ -40,8 +40,8 @@ class AuthService: ObservableObject {
     
     func fetchUser(){
         guard let user = self.userSession else {return}
-        UserService().fetchuserFromFb(uid: user.uid) { user in
-            self.userModel = user
+        UserService().fetchuserFromFb(uid: user.uid) { [weak self] user in
+            self?.userModel = user
         }
     }
     

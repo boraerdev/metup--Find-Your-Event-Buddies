@@ -9,8 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var vm: AuthService
+    @StateObject var homeVm = HomeViewModel()
     
     init(){
+        
     }
     
     var body: some View {
@@ -22,10 +24,9 @@ struct HomeView: View {
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom,.horizontal,.top])
-                ForEach(0..<10, id: \.self) { i in
-                    PostLargeRowView().padding([.horizontal, .bottom])
-                        
-                }
+                ForEach(homeVm.allPost) { gelen in
+                    PostLargeRowView(post: gelen).padding([.bottom, .horizontal])
+                    }
                 Spacer()
             }
         }.navigationBarHidden(true)

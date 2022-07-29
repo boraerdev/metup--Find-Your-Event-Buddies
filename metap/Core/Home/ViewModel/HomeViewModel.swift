@@ -19,7 +19,6 @@ class HomeViewModel: ObservableObject {
     
     func fetchAllPos (){
         PostService().fetchAllPosts { posts in
-            print(posts)
             self.allPost = posts
         }
     }

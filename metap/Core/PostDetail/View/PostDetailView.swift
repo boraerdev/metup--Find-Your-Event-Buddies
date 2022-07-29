@@ -59,6 +59,7 @@ extension PostDetailView {
 
             } placeholder: {
                 ProgressView()
+                    .frame(width: 300, height: 200, alignment: .center)
             }
 
             

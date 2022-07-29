@@ -59,6 +59,7 @@ extension HomeView {
 
                 } placeholder: {
                     Circle()
+                        .fill(.white)
                         .frame(width: 32, height: 32)
 
                 }

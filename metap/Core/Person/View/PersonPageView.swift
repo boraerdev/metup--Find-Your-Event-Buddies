@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 struct PersonView: View {
     @EnvironmentObject var vm: AuthService
+    @StateObject var personVm = PersonViewModel()
     
     var body: some View {
         VStack{
@@ -25,9 +26,13 @@ struct PersonView: View {
                     .font(.title3)
                 .bold()
                 Divider()
-            }.padding()
+                ScrollView{
+                    ForEach(personVm.personsPosts) { gelen in
+                        PostLargeRowView(post: gelen).padding([.bottom, .horizontal])
+                    }
+                }
+            }
             
-            Spacer()
         }
        
         
@@ -68,6 +73,7 @@ extension PersonView {
                         .frame(width: 70, height: 70)
                 } placeholder: {
                             Circle()
+                        .fill(.white)
                                 .frame(width: 70, height: 70)
                 }
 

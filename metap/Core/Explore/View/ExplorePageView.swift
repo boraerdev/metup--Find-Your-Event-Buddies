@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ExplorePageView: View {
-    @State var aranan: String = ""
+    @ObservedObject var exploreVm = ExploreViewModel()
     var body: some View {
         VStack{
-            FieldView(bindingVar: $aranan).padding()
+            FieldView(bindingVar: $exploreVm.searched).padding()
             ScrollView{
-                
+                ForEach(exploreVm.searchedList) { gelen in
+                    PostLargeRowView(post: gelen).padding([.bottom,.horizontal])
+                }
             }
         }
     }

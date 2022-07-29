@@ -24,6 +24,21 @@ struct PostService {
                 guard let post = try? document.data(as: Post.self) else {return}
                 allPost.append(post)
             }
+            completion(allPost)
+        }
+    }
+    
+    func fetchPersonPosts(uid: String, completion: @escaping ([Post])->Void){
+        
+        Firestore.firestore().collection("posts").whereField("userUid", in: [uid]).getDocuments { querySnapshots, error in
+            var allPost: [Post] = []
+            guard error == nil else {return}
+            guard let snapshot = querySnapshots else {return}
+            
+            for document in snapshot.documents{
+                guard let post = try? document.data(as: Post.self) else {return}
+                allPost.append(post)
+            }
 
             completion(allPost)
         }

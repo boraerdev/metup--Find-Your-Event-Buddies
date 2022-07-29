@@ -48,8 +48,19 @@ extension HomeView {
                     .font(.title2)
                     .foregroundColor(.accentColor)
                 Spacer()
-                Circle()
-                    .frame(width: 32, height: 32)
+
+                AsyncImage(url: URL(string: vm.userModel?.ppUrl ?? "")) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 32, height: 32)
+                        .clipShape(Circle())
+
+                } placeholder: {
+                    Circle()
+                        .frame(width: 32, height: 32)
+
+                }
 
                 
                 

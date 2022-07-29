@@ -34,6 +34,8 @@
 		0A99E555289322B500FFB11B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99E554289322B500FFB11B /* Service.swift */; };
 		0AC691E12894616F0059BE5D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691E02894616F0059BE5D /* UserModel.swift */; };
 		0AC691E3289473330059BE5D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691E2289473330059BE5D /* UserService.swift */; };
+		0AC691E5289481FA0059BE5D /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691E4289481FA0059BE5D /* PostService.swift */; };
+		0AC691E7289483620059BE5D /* AddPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691E6289483620059BE5D /* AddPageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		0A99E554289322B500FFB11B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		0AC691E02894616F0059BE5D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0AC691E2289473330059BE5D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		0AC691E4289481FA0059BE5D /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		0AC691E6289483620059BE5D /* AddPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,7 @@
 		0A99E51D2892C52A00FFB11B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0AC691E6289483620059BE5D /* AddPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 			children = (
 				0A99E554289322B500FFB11B /* Service.swift */,
 				0AC691E2289473330059BE5D /* UserService.swift */,
+				0AC691E4289481FA0059BE5D /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -441,9 +447,11 @@
 				0A99E5432893103700FFB11B /* LoginPageView.swift in Sources */,
 				0A99E5362892D90300FFB11B /* FieldView.swift in Sources */,
 				0A99E5322892C80500FFB11B /* PostLargeRowView.swift in Sources */,
+				0AC691E7289483620059BE5D /* AddPageViewModel.swift in Sources */,
 				0A99E5032892C1D800FFB11B /* metapApp.swift in Sources */,
 				0A99E5402892FE5700FFB11B /* PostDetailView.swift in Sources */,
 				0AC691E12894616F0059BE5D /* UserModel.swift in Sources */,
+				0AC691E5289481FA0059BE5D /* PostService.swift in Sources */,
 				0AC691E3289473330059BE5D /* UserService.swift in Sources */,
 				0A99E5452893104C00FFB11B /* SignupPageView.swift in Sources */,
 				0A99E5182892C2A100FFB11B /* MainTabView.swift in Sources */,

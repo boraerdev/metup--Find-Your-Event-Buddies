@@ -60,15 +60,24 @@ extension PersonView {
             HStack {
                 
                 
-                Circle()
-                    .frame(width: 70, height: 70)
+                AsyncImage(url: URL(string: vm.userModel?.ppUrl ?? "")) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .frame(width: 70, height: 70)
+                } placeholder: {
+                            Circle()
+                                .frame(width: 70, height: 70)
+                }
+
                 
                 
                 
                 VStack(alignment: .leading){
-                    Text("Bora Erdem")
+                    Text(vm.userModel?.fullname ?? "")
                         .fontWeight(.bold)
-                    Text("/boraerdev@gmail.com")
+                    Text(vm.userModel?.email ?? "")
                         .foregroundColor(.secondary)
                         .font(.subheadline)
 

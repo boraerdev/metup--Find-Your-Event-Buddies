@@ -10,12 +10,15 @@ import Firebase
 
 struct UserService{
     
-    func fetchuserFromFb(uid: String){
-            Firestore.firestore().document(uid).getDocument { snapshot, error in
+    func fetchuserFromFb(uid: String, completion: @escaping (User)->Void){
+            Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
                 guard error == nil else {return}
                 
-                guard let data = snapshot?.data() else {return}
-                print("DEBUG: \(data)")
+                guard let snapshot = snapshot else {return}
+                
+                guard let user = try? snapshot.data(as: User.self) else {return}
+                print(user.fullname)
+                completion(user)
             }
     }
         

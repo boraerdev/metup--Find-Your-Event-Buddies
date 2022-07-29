@@ -13,7 +13,7 @@ struct AddPageView: View {
     @State var etkinlikAdresi: String = ""
     @State var kacSaatIcinde: Int = 1
     @State var kacKisilik: Int = 1
-    
+    @StateObject var addVm =  AddPageViewModel()
     @State private var image: UIImage? = nil
     @State private var showSheet = false
 
@@ -86,21 +86,38 @@ struct TextEditorView: View {
 
 extension AddPageView {
     
-    private var shareButton : some View {
-        HStack{
-            Image(systemName: "plus")
-              
-            Text("Paylaş").font(.title2)
+    func uploadClicked(){
+        guard etkinlikAdi != "" && etkinlikAdresi != "" && etkinlikAciklamasi != "" && image != nil else {
+            addVm.anyError.toggle()
+            return
         }
-        .padding()
-        .padding(.horizontal)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
-                .shadow(color: .black.opacity(0.3), radius: 15, x: 0, y: 10)
-        )
-        .padding(30)
-        .foregroundColor(.accentColor)
+        
+        addVm.uploadPost(etkinlikAdi: etkinlikAdi, etkinlikAciklamasi: etkinlikAciklamasi, etkinlikAdresi: etkinlikAdresi, kacSaatIcinde: kacSaatIcinde, kacKisilik: kacKisilik, image: image!)
+
+    }
+    
+    private var shareButton : some View {
+        
+        Button {
+            self.uploadClicked()
+        } label: {
+            HStack{
+                Image(systemName: "plus")
+                  
+                Text("Paylaş").font(.title2)
+            }
+            .padding()
+            .padding(.horizontal)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.white)
+                    .shadow(color: .black.opacity(0.3), radius: 15, x: 0, y: 10)
+            )
+            .padding(30)
+            .foregroundColor(.accentColor)
+            
+        }
+
         
     }
     

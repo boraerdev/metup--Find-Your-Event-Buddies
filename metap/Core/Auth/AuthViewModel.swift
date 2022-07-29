@@ -18,8 +18,8 @@ class AuthService: ObservableObject {
     @Published var userModel: User?
     
     init(){
-            //self.userSession = Auth.auth().currentUser
-//            self.fetchUser()
+            self.userSession = Auth.auth().currentUser
+            self.fetchUser()
         
     }
     
@@ -40,7 +40,9 @@ class AuthService: ObservableObject {
     
     func fetchUser(){
         guard let user = self.userSession else {return}
-        UserService().fetchuserFromFb(uid:  user.uid)
+        UserService().fetchuserFromFb(uid: user.uid) { user in
+            self.userModel = user
+        }
     }
     
     
@@ -54,7 +56,7 @@ class AuthService: ObservableObject {
             
             self.userSession = result?.user
             guard let image = image else {return}
-            self.downloadPP(image: image) { url in
+            Service().downloadPP(image: image) { url in
                 var ppUrl = url
                 let data = ["fullname": fullName, "email": email, "ppUrl": ppUrl] as [String: Any]
                 Firestore.firestore().collection("users").document((self.userSession?.uid)!).setData(data) { error in
@@ -74,12 +76,7 @@ class AuthService: ObservableObject {
     
     
     
-    func downloadPP (image: UIImage?, completion : @escaping (String) -> Void ){
-        guard let image = image else { return }
-        service().uploadImage(image: image, path: "pp") { url in
-                completion(url)
-        }
-    }
+    
     
     
     

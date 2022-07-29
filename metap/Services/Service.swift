@@ -9,7 +9,14 @@ import Foundation
 import UIKit
 import FirebaseStorage
 
-struct service {
+struct Service {
+    
+    func downloadPP (image: UIImage?, completion : @escaping (String) -> Void ){
+        guard let image = image else { return }
+        Service().uploadImage(image: image, path: "pp") { url in
+                completion(url)
+        }
+    }
     
     func uploadImage( image: UIImage, path: String, completion: @escaping (String)->Void) {
         
@@ -38,5 +45,11 @@ struct service {
         
         
     }
+    
+    func uploadPost (etkinlikAdi: String,etkinlikAciklamasi: String,etkinlikAdresi: String,kacSaatIcinde: Int, kacKisilik: Int) {
+        
+    }
+    
+    
     
 }

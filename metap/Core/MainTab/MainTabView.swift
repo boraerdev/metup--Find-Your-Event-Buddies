@@ -10,6 +10,7 @@ import SwiftUI
 struct MainTabView: View {
     @State var selectedIndex: Int = 0
     @State var goAdd: Bool = false
+    @EnvironmentObject var vm: AuthService
 
     var iconList: [String] = ["house","magnifyingglass", "plus.app", "quote.bubble", "person"]
     var body: some View {
@@ -25,7 +26,7 @@ struct MainTabView: View {
                 case 3:
                     ChatPageView()
                 case 4:
-                    PersonView()
+                    PersonView(user: vm.userModel ?? User(email: "a@a", fullname: "a", ppUrl: "a"))
                 default:
                     HomeView(selectedIndex: $selectedIndex)
                 }
@@ -41,6 +42,7 @@ struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             MainTabView()
+                .environmentObject(AuthService())
 
         }
     }

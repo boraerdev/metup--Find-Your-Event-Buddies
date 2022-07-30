@@ -7,7 +7,8 @@
 
 import Foundation
 import FirebaseFirestoreSwift
-
+import Firebase
+import SwiftUI
 struct Post: Identifiable, Decodable {
     @DocumentID var id: String?
     let etkinlikAdi: String
@@ -17,4 +18,5 @@ struct Post: Identifiable, Decodable {
     let kacKisilik: Int
     let imageUrl: String
     let userUid: String
+    let tarih: Timestamp    
 }

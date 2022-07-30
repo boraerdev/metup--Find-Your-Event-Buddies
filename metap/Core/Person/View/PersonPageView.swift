@@ -9,8 +9,14 @@ import SwiftUI
 import Firebase
 struct PersonView: View {
     @EnvironmentObject var vm: AuthService
-    @StateObject var personVm = PersonViewModel()
+    @ObservedObject var personVm : PersonViewModel
     @Environment (\.presentationMode) var presentationMode
+    var user: User
+    
+    init(user: User){
+        self.user = user
+        personVm = PersonViewModel(user: self.user)
+    }
     
     var body: some View {
         VStack{
@@ -32,7 +38,7 @@ extension PersonView {
     
     private var myposts: some View{
         VStack {
-            Text("Tüm Etkinlikleri")
+            Text("Tüm Etkinlikler")
                 .font(.title3)
             .bold()
             Divider()
@@ -44,6 +50,15 @@ extension PersonView {
         }
     }
     
+    private var checkCurUser: some View {
+        VStack{
+            if user.id == Auth.auth().currentUser?.uid {
+                logoutButton
+            }
+        }
+        
+    }
+    
     private var nav: some View {
         HStack{
             Image(systemName: "chevron.backward").font(.title2).foregroundColor(.accentColor)
@@ -51,7 +66,8 @@ extension PersonView {
                     presentationMode.wrappedValue.dismiss()
                 }
             Spacer()
-            logoutButton
+            
+            checkCurUser
 
         }
     }
@@ -72,7 +88,7 @@ extension PersonView {
             HStack {
                 
                 
-                AsyncImage(url: URL(string: vm.userModel?.ppUrl ?? "")) { image in
+                AsyncImage(url: URL(string: user.ppUrl)) { image in
                     image
                         .resizable()
                         .scaledToFill()
@@ -88,9 +104,9 @@ extension PersonView {
                 
                 
                 VStack(alignment: .leading){
-                    Text(vm.userModel?.fullname ?? "")
+                    Text(user.fullname)
                         .fontWeight(.bold)
-                    Text(vm.userModel?.email ?? "")
+                    Text("@" + (personVm.user.email.split(separator: "@" )[0]))
                         .foregroundColor(.secondary)
                         .font(.subheadline)
 

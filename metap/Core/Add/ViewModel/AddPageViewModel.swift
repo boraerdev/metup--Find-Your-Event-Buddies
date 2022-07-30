@@ -19,9 +19,9 @@ class AddPageViewModel: ObservableObject {
     
     
     func uploadPost(etkinlikAdi: String,etkinlikAciklamasi: String,etkinlikAdresi: String,kacSaatIcinde: Int, kacKisilik: Int, image: UIImage){
-        var userUid = vm.userSession?.uid
+        let userUid = vm.userSession?.uid
         Service().uploadImage(image: image, path: "post") { url in
-            let data = ["etkinlikAdi": etkinlikAdi, "etkinlikAciklamasi" : etkinlikAciklamasi, "etkinlikAdresi": etkinlikAdresi, "kacSaatIcinde": kacSaatIcinde, "kacKisilik": kacKisilik, "userUid": userUid, "imageUrl": url   ] as [String : Any]
+            let data = ["tarih" : Timestamp() , "etkinlikAdi": etkinlikAdi, "etkinlikAciklamasi" : etkinlikAciklamasi, "etkinlikAdresi": etkinlikAdresi, "kacSaatIcinde": kacSaatIcinde, "kacKisilik": kacKisilik, "userUid": userUid, "imageUrl": url   ] as [String : Any]
             Firestore.firestore().collection("posts").document(UUID().uuidString)
                 .setData(data) { error in
                     guard error == nil else {

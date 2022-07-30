@@ -12,6 +12,7 @@ struct PostDetailView: View {
     var post: Post
     @EnvironmentObject var envoirement: AuthService
     @ObservedObject var vm : PostDetailViewModel
+    @State var goProfile: Bool = false
     
     init(post: Post){
         self.post = post
@@ -35,6 +36,9 @@ struct PostDetailView: View {
                 }
             }
             shareButton
+        }
+        .sheet(isPresented: $goProfile) {
+            PersonView(user: vm.user ?? User(email: "", fullname: "", ppUrl: ""))
         }
     }
 }
@@ -136,9 +140,18 @@ extension PostDetailView {
             }
             Spacer()
             VStack(alignment: .trailing){
-                Text(Date().formatted(date: .long, time: .omitted)).font(.footnote).foregroundColor(.secondary)
-                Text(Date().formatted(date: .omitted, time: .shortened)).font(.footnote).foregroundColor(.accentColor)
+                Text(Date(timeIntervalSince1970: Double(post.tarih.seconds)).formatted(date: .long, time: .omitted))
+                    .font(.footnote).foregroundColor(.secondary)
+                Text(Date(timeIntervalSince1970: Double(post.tarih.seconds)).formatted(date: .omitted, time: .shortened))
+                    .font(.footnote).foregroundColor(.accentColor)
+                
+                
+
+//                Text(Date().formatted(date: .long, time: .omitted)).font(.footnote).foregroundColor(.secondary)
+//                Text(Date().formatted(date: .omitted, time: .shortened)).font(.footnote).foregroundColor(.accentColor)
             }
+        }.onTapGesture {
+            goProfile.toggle()
         }
 
     }

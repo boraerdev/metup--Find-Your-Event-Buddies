@@ -18,15 +18,18 @@ class AuthService: ObservableObject {
     @Published var userModel: User?
     
     init(){
+        DispatchQueue.main.async {
             self.userSession = Auth.auth().currentUser
             self.fetchUser()
-        
+            
+
+        }
     }
     
     func logOut(){
+        try? Auth.auth().signOut()
         self.userModel = nil
         self.userSession = nil
-        try? Auth.auth().signOut()
         
     }
     
@@ -36,13 +39,15 @@ class AuthService: ObservableObject {
             guard error == nil else {return}
             guard let user = result?.user else {return}
             self.userSession = user
+            self.fetchUser()
         }
+        self.userSession = Auth.auth().currentUser
     }
     
     func fetchUser(){
         guard let user = self.userSession else {return}
-        UserService().fetchuserFromFb(uid: user.uid) { [weak self] user in
-            self?.userModel = user
+        UserService().fetchuserFromFb(uid: user.uid) {  user in
+            self.userModel = user
         }
     }
     
@@ -58,7 +63,7 @@ class AuthService: ObservableObject {
             self.userSession = result?.user
             guard let image = image else {return}
             Service().downloadPP(image: image) { url in
-                var ppUrl = url
+                let ppUrl = url
                 let data = ["fullname": fullName, "email": email, "ppUrl": ppUrl] as [String: Any]
                 Firestore.firestore().collection("users").document((self.userSession?.uid)!).setData(data) { error in
                     if let error = error {
@@ -68,8 +73,8 @@ class AuthService: ObservableObject {
             }
             guard let user = result?.user else {return}
             self.userSession = user
-
-
+            self.fetchUser()
+            
         }
     }
     

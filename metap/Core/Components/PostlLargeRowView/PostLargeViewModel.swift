@@ -10,10 +10,12 @@ import Foundation
 class PostLargeViewModel: ObservableObject {
     
     @Published var name: String = ""
-    @Published var user: User? = nil
+    @Published var user: User?
     
     init(post: Post){
-        self.fetchData(post: post)
+        DispatchQueue.main.async {
+            self.fetchData(post: post)
+        }
     }
     
     func fetchData(post: Post){

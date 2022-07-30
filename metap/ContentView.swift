@@ -11,7 +11,7 @@ import Firebase
 struct ContentView: View {
     @EnvironmentObject var vm: AuthService
     var body: some View {
-        if  Auth.auth().currentUser != nil {
+        if  vm.userSession != nil {
             MainTabView()
         } else {
             LoginPageView()

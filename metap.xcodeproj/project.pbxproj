@@ -40,6 +40,7 @@
 		0AC691EC28948D3F0059BE5D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691EB28948D3F0059BE5D /* HomeViewModel.swift */; };
 		0AC691EE28949D360059BE5D /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691ED28949D360059BE5D /* PersonViewModel.swift */; };
 		0AC691F02894A05D0059BE5D /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691EF2894A05D0059BE5D /* ExploreViewModel.swift */; };
+		0AC691F32894A8420059BE5D /* PostLargeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691F22894A8420059BE5D /* PostLargeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		0AC691EB28948D3F0059BE5D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0AC691ED28949D360059BE5D /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewModel.swift; sourceTree = "<group>"; };
 		0AC691EF2894A05D0059BE5D /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		0AC691F22894A8420059BE5D /* PostLargeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLargeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				0A99E5312892C80500FFB11B /* PostLargeRowView.swift */,
+				0AC691F22894A8420059BE5D /* PostLargeViewModel.swift */,
 			);
 			path = PostlLargeRowView;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				0AC691E3289473330059BE5D /* UserService.swift in Sources */,
 				0A99E5452893104C00FFB11B /* SignupPageView.swift in Sources */,
 				0A99E5182892C2A100FFB11B /* MainTabView.swift in Sources */,
+				0AC691F32894A8420059BE5D /* PostLargeViewModel.swift in Sources */,
 				0A99E52E2892C5B300FFB11B /* ExplorePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

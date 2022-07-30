@@ -9,6 +9,16 @@ import SwiftUI
 
 struct PostLargeRowView: View {
     var post: Post
+    
+    
+    @ObservedObject var vm : PostLargeViewModel
+    
+    init(post: Post){
+        self.post = post
+        vm = PostLargeViewModel(post: post)
+    }
+    
+    
     var body: some View {
         VStack(alignment: .leading){
             NavigationLink {
@@ -22,7 +32,7 @@ struct PostLargeRowView: View {
                                     titleDesc
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                     infoHstack
-                                    SubCapsule(messageButton: true, title: "Bora Erdem", image: "bubble.left.and.bubble.right")
+                                    SubCapsule(messageButton: true, title: vm.user?.fullname ?? "", image: "bubble.left.and.bubble.right")
                                 }
                             }
                         }

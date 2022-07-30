@@ -24,6 +24,7 @@ class AuthService: ObservableObject {
     }
     
     func logOut(){
+        self.userModel = nil
         self.userSession = nil
         try? Auth.auth().signOut()
         

@@ -10,23 +10,17 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var vm: AuthService
     @StateObject var homeVm = HomeViewModel()
+    @Binding var selectedIndex: Int
     
-    init(){
-        
-    }
     
     var body: some View {
         VStack(spacing:0) {
             headerView
             ScrollView {
-                Text("Son eklenenler")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.bottom,.horizontal,.top])
+                title
                 ForEach(homeVm.allPost) { gelen in
-                    PostLargeRowView(post: gelen).padding([.bottom, .horizontal])
-                    }
+                    PostLargeRowView(post: gelen).padding(.horizontal).padding(.bottom,8)
+                }
                 Spacer()
             }
         }.navigationBarHidden(true)
@@ -35,13 +29,20 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(selectedIndex: .constant(0))
     }
 }
 
 extension HomeView {
     
-        
+    private var title: some View {
+        Text("Son eklenenler")
+            .font(.title3)
+            .fontWeight(.bold)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding([.horizontal,.top]).padding(.bottom,8)
+    }
+    
     private var headerView : some View {
         VStack (spacing:0){
             HStack {
@@ -62,7 +63,10 @@ extension HomeView {
                         .fill(.white)
                         .frame(width: 32, height: 32)
 
+                }.onTapGesture {
+                    selectedIndex = 4
                 }
+               
 
                 
                 

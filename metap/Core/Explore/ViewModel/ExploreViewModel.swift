@@ -31,7 +31,7 @@ class ExploreViewModel: ObservableObject {
                     let filtered = allPosts.filter { post in
                         return post.etkinlikAdresi.lowercased().contains(lowercase) ||
                         post.etkinlikAdi.lowercased().contains(lowercase) ||
-                        post.etkinlikAciklamasi.lowercased().contains(lowercase)
+                        post.etkinlikAciklamasi.lowercased().contains(lowercase) 
                     }
                     return filtered
 

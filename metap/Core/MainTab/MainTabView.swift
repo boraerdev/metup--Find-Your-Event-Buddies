@@ -11,13 +11,13 @@ struct MainTabView: View {
     @State var selectedIndex: Int = 0
     @State var goAdd: Bool = false
 
-    var iconList: [String] = ["house","magnifyingglass", "plus.app", "bubble.left", "person"]
+    var iconList: [String] = ["house","magnifyingglass", "plus.app", "quote.bubble", "person"]
     var body: some View {
         VStack(spacing:0){
             VStack{
                 switch selectedIndex{
                 case 0:
-                    HomeView()
+                    HomeView(selectedIndex: $selectedIndex)
                 case 1:
                     ExplorePageView()
 //                case 2:
@@ -27,7 +27,7 @@ struct MainTabView: View {
                 case 4:
                     PersonView()
                 default:
-                    HomeView()
+                    HomeView(selectedIndex: $selectedIndex)
                 }
             }
             tabbar

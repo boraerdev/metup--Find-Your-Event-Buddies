@@ -86,8 +86,10 @@ struct TextEditorView: View {
 
 extension AddPageView {
     
+    //MARK: Functions
+    
     func uploadClicked(){
-        guard etkinlikAdi != "" && etkinlikAdresi != "" && etkinlikAciklamasi != "" && image != nil else {
+        guard etkinlikAdi.count > 20 && etkinlikAdresi.count > 20 && etkinlikAciklamasi.count > 20 && image != nil else {
             addVm.anyError.toggle()
             return
         }
@@ -95,6 +97,8 @@ extension AddPageView {
         addVm.uploadPost(etkinlikAdi: etkinlikAdi, etkinlikAciklamasi: etkinlikAciklamasi, etkinlikAdresi: etkinlikAdresi, kacSaatIcinde: kacSaatIcinde, kacKisilik: kacKisilik, image: image!)
 
     }
+    
+    //MARK: Views
     
     private var shareButton : some View {
         
@@ -119,7 +123,7 @@ extension AddPageView {
             .padding(30)
             .foregroundColor(.accentColor)
             .alert(isPresented: $addVm.anyError) {
-                Alert(title: Text("Hata"), message: Text("Bir şey oldu."), dismissButton: Alert.Button.default(Text("OK")))
+                Alert(title: Text("Hata"), message: Text("Başlık, adres ve açıklama alanı 20 karakterden kısa olamaz. Fotoğraf alanı boş geçilemez."), dismissButton: Alert.Button.default(Text("OK")))
             }
         }
 

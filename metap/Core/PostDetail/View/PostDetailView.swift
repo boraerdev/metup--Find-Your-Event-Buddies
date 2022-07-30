@@ -10,15 +10,28 @@ import SwiftUI
 struct PostDetailView: View {
     @Environment (\.presentationMode) var presentationMode
     var post: Post
+    @EnvironmentObject var envoirement: AuthService
+    @ObservedObject var vm : PostDetailViewModel
+    
+    init(post: Post){
+        self.post = post
+        vm = PostDetailViewModel(post: post)
+    }
+    
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack{
                 header.padding()
                 ScrollView{
+                    VStack{
+                        userInfo
+                    }.padding(.horizontal)
                     imageView
                     adressView
                     detailView
                     Spacer()
+                    
                 }
             }
             shareButton
@@ -34,22 +47,36 @@ struct PostDetailView: View {
 
 extension PostDetailView {
     
+    private var trashImagine: some View {
+        VStack{
+            if (post.userUid == envoirement.userSession?.uid) {
+                Image(systemName: "trash").font(.title2).foregroundColor(.red)
+                    .onTapGesture {
+                        vm.deleteImage(post: post)
+                        vm.deletePost(post: post)
+                        presentationMode.wrappedValue.dismiss()
+                    }
+            }
+        }
+    }
+    
     private var header: some View {
         HStack{
-            Image(systemName: "chevron.backward").font(.title).foregroundColor(.accentColor)
+            Image(systemName: "chevron.backward").font(.title2).foregroundColor(.accentColor)
+                .padding(.trailing)
                 .onTapGesture {
                     presentationMode.wrappedValue.dismiss()
                 }
             Text(post.etkinlikAdi).lineLimit(1)
                 .font(.title3)
             Spacer()
+            trashImagine
         }
 
     }
     
     private var imageView: some View {
         VStack{
-            
             AsyncImage(url: URL(string: post.imageUrl)) { image in
                 image
                     .resizable()
@@ -61,11 +88,6 @@ extension PostDetailView {
                 ProgressView()
                     .frame(width: 300, height: 200, alignment: .center)
             }
-
-            
-            
-            
-                
             HStack{
                 SubCapsule(messageButton: true, title : String("\(post.kacSaatIcinde) Kişi") , image: "person")
                 SubCapsule(title: String("\(post.kacKisilik) Saat İçinde"), image: "clock")
@@ -87,8 +109,38 @@ extension PostDetailView {
                 Text("Etkinlik Detayları").font(.title3).bold().padding(.vertical,6)
                 Text(post.etkinlikAciklamasi)
 
-            }
+            }.frame(maxWidth: .infinity, minHeight: 200,alignment: .topLeading)
         }.padding(.horizontal)
+    }
+    
+    private var userInfo: some View {
+        HStack{
+            AsyncImage(url: URL(string: (vm.user?.ppUrl ?? ""))) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .clipShape(Circle())
+                    .frame(width: 32, height: 32)
+            } placeholder: {
+                Circle()
+                    .fill(.white)
+                    .frame(width: 32, height: 32)
+
+            }
+            VStack(alignment: .leading){
+                Text((vm.user?.fullname ?? ""))
+                    .bold()
+                Text("@" + (vm.user?.email.split(separator: "@" )[0] ?? ""))
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            Spacer()
+            VStack(alignment: .trailing){
+                Text(Date().formatted(date: .long, time: .omitted)).font(.footnote).foregroundColor(.secondary)
+                Text(Date().formatted(date: .omitted, time: .shortened)).font(.footnote).foregroundColor(.accentColor)
+            }
+        }
+
     }
     
     private var shareButton : some View {

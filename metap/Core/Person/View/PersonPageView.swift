@@ -10,44 +10,51 @@ import Firebase
 struct PersonView: View {
     @EnvironmentObject var vm: AuthService
     @StateObject var personVm = PersonViewModel()
+    @Environment (\.presentationMode) var presentationMode
     
     var body: some View {
         VStack{
-            HStack{
-                Image(systemName: "chevron.backward").font(.title).foregroundColor(.accentColor)
-                Spacer()
-                logoutButton
-
-            }
+            nav
             .padding()
             header
-            VStack {
-                Text("Tüm Etkinlikleri")
-                    .font(.title3)
-                .bold()
-                Divider()
-                ScrollView{
-                    ForEach(personVm.personsPosts) { gelen in
-                        PostLargeRowView(post: gelen).padding([.bottom, .horizontal])
-                    }
-                }
-            }
-            
+            myposts
         }
-       
-        
     }
 }
 
-struct PersonView_Previews: PreviewProvider {
-    static var previews: some View {
-        PersonView()
-    }
-}
+//struct PersonView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PersonView()
+//    }
+//}
 
 extension PersonView {
     
+    private var myposts: some View{
+        VStack {
+            Text("Tüm Etkinlikleri")
+                .font(.title3)
+            .bold()
+            Divider()
+            ScrollView{
+                ForEach(personVm.personsPosts) { gelen in
+                    PostLargeRowView(post: gelen).padding([.bottom, .horizontal])
+                }
+            }
+        }
+    }
     
+    private var nav: some View {
+        HStack{
+            Image(systemName: "chevron.backward").font(.title2).foregroundColor(.accentColor)
+                .onTapGesture {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            Spacer()
+            logoutButton
+
+        }
+    }
     
     private var logoutButton: some View {
         Button {
@@ -89,11 +96,12 @@ extension PersonView {
 
                 }
                 Spacer()
-                Image(systemName: "bubble.left.and.bubble.right.fill")
+                Image(systemName: "quote.bubble")
                     .font(.title)
                     .foregroundColor(.accentColor)
             }.padding()
 
         }
     }
+    
 }

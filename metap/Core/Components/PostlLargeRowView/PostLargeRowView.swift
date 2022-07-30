@@ -32,7 +32,7 @@ struct PostLargeRowView: View {
                                     titleDesc
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                     infoHstack
-                                    SubCapsule(messageButton: true, title: vm.user?.fullname ?? "", image: "bubble.left.and.bubble.right")
+                                    SubCapsule(messageButton: true, title: vm.user?.fullname ?? "", image: "quote.bubble")
                                 }
                             }
                         }
@@ -52,7 +52,7 @@ struct PostLargeRowView: View {
                             
                                 
                         }
-                    }
+                    }.cornerRadius(5)
                     
                     .frame(height:150)
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -80,8 +80,8 @@ extension PostLargeRowView {
         VStack {
             HStack{
                 HStack {
-                    SubCapsule(title: String(post.kacKisilik), image: "person")
-                    SubCapsule(title: String(post.kacSaatIcinde), image: "clock")
+                    SubCapsule(title: String("\(post.kacKisilik) Kişi"), image: "person")
+                    SubCapsule(title: String("\(post.kacSaatIcinde) Saate"), image: "clock")
                     SubCapsule(title: String(post.etkinlikAdresi), image: "map")
                 }
             }

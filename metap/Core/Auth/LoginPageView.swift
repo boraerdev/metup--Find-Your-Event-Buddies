@@ -20,28 +20,12 @@ struct LoginPageView: View {
             VStack{
                 FieldView(title: "Mail", bindingVar: $email)
                 FieldView(isPassword: true, title: "Şifre", bindingVar: $pass)
-                
-                Button {
-                    vm.login(email: email, pass: pass)
-                } label: {
-                    Text("Giriş Yap").padding(.horizontal).foregroundColor(.accentColor).padding()            }.padding()
-
+                loginButtom
                 }
-
-                
-                
                 Spacer()
-            HStack{
-                Text("Hesabın var mı?").foregroundColor(.secondary)
-                NavigationLink {
-                    SignupPageView().navigationBarHidden(true)
-                } label: {
-                    Text("Kayıt Ol").foregroundColor(.accentColor)
-                }
-
-                
-            }
+            footer
         }
+        .padding(.horizontal)
     }
 }
 
@@ -55,5 +39,27 @@ struct LoginPageView_Previews: PreviewProvider {
 }
 
 extension LoginPageView {
+    
+    private var footer: some View {
+        HStack{
+            Text("Hesabın var mı?").foregroundColor(.secondary)
+            NavigationLink {
+                SignupPageView().navigationBarHidden(true)
+            } label: {
+                Text("Kayıt Ol").foregroundColor(.accentColor)
+            }
+        }
 
+    }
+
+    private var loginButtom: some View {
+        VStack{
+            Button {
+                vm.login(email: email, pass: pass)
+            } label: {
+                Text("Giriş Yap").padding(.horizontal).foregroundColor(.accentColor).padding()            }.padding()
+
+        }
+    }
+    
 }

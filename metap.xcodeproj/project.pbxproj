@@ -41,6 +41,7 @@
 		0AC691EE28949D360059BE5D /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691ED28949D360059BE5D /* PersonViewModel.swift */; };
 		0AC691F02894A05D0059BE5D /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691EF2894A05D0059BE5D /* ExploreViewModel.swift */; };
 		0AC691F32894A8420059BE5D /* PostLargeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691F22894A8420059BE5D /* PostLargeViewModel.swift */; };
+		0AC691F52894AE0F0059BE5D /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC691F42894AE0F0059BE5D /* PostDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		0AC691ED28949D360059BE5D /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewModel.swift; sourceTree = "<group>"; };
 		0AC691EF2894A05D0059BE5D /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		0AC691F22894A8420059BE5D /* PostLargeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLargeViewModel.swift; sourceTree = "<group>"; };
+		0AC691F42894AE0F0059BE5D /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 		0A99E53D2892FE4400FFB11B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0AC691F42894AE0F0059BE5D /* PostDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				0A99E5162892C29400FFB11B /* HomeView.swift in Sources */,
 				0A99E5472893105B00FFB11B /* AuthViewModel.swift in Sources */,
 				0A99E5052892C1D800FFB11B /* ContentView.swift in Sources */,
+				0AC691F52894AE0F0059BE5D /* PostDetailViewModel.swift in Sources */,
 				0A99E5432893103700FFB11B /* LoginPageView.swift in Sources */,
 				0A99E5362892D90300FFB11B /* FieldView.swift in Sources */,
 				0A99E5322892C80500FFB11B /* PostLargeRowView.swift in Sources */,

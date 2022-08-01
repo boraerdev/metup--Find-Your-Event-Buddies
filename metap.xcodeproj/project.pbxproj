@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A184CE6289852D1005501AA /* ChatPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A184CE5289852D1005501AA /* ChatPageViewModel.swift */; };
+		0A184CE8289854CB005501AA /* ChatPageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A184CE7289854CB005501AA /* ChatPageRow.swift */; };
 		0A99E5032892C1D800FFB11B /* metapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99E5022892C1D800FFB11B /* metapApp.swift */; };
 		0A99E5052892C1D800FFB11B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99E5042892C1D800FFB11B /* ContentView.swift */; };
 		0A99E5072892C1D900FFB11B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A99E5062892C1D900FFB11B /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A184CE5289852D1005501AA /* ChatPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPageViewModel.swift; sourceTree = "<group>"; };
+		0A184CE7289854CB005501AA /* ChatPageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPageRow.swift; sourceTree = "<group>"; };
 		0A99E4FF2892C1D800FFB11B /* metap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = metap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A99E5022892C1D800FFB11B /* metapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = metapApp.swift; sourceTree = "<group>"; };
 		0A99E5042892C1D800FFB11B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 		0A99E5222892C55900FFB11B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0A184CE5289852D1005501AA /* ChatPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				0A99E5352892D90300FFB11B /* FieldView.swift */,
 				0A99E53A2892F90D00FFB11B /* NumberPicker.swift */,
 				0ABDB2E82895CB80001F58A0 /* MessageBubble.swift */,
+				0A184CE7289854CB005501AA /* ChatPageRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 				0A99E52A2892C58C00FFB11B /* ChatPageView.swift in Sources */,
 				0A99E5162892C29400FFB11B /* HomeView.swift in Sources */,
 				0A99E5472893105B00FFB11B /* AuthViewModel.swift in Sources */,
+				0A184CE8289854CB005501AA /* ChatPageRow.swift in Sources */,
 				0A99E5052892C1D800FFB11B /* ContentView.swift in Sources */,
 				0AC691F52894AE0F0059BE5D /* PostDetailViewModel.swift in Sources */,
 				0A99E5432893103700FFB11B /* LoginPageView.swift in Sources */,
@@ -536,6 +543,7 @@
 				0ABDB2E72895CB21001F58A0 /* MessageModel.swift in Sources */,
 				0AC691F32894A8420059BE5D /* PostLargeViewModel.swift in Sources */,
 				0A99E52E2892C5B300FFB11B /* ExplorePageView.swift in Sources */,
+				0A184CE6289852D1005501AA /* ChatPageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,19 +6,28 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ChatPageView: View {
+    @StateObject var vm = ChatViewModel()
+    @State var chats: [User] = []
+    @State var cancellable = Set<AnyCancellable>()
+    init(){
+      
+    }
+    
     var body: some View {
         VStack{
-            VStack{
-                Spacer()
-                Text("Mesajlar listesi şimdilik destekleniyor. İletişimini etkinlik üzerindeki 'Mesaj' kısmından takip edebilirsin")
-                    .foregroundColor(.secondary)
-                    .font(.callout)
-                    .multilineTextAlignment(.center)
-                    .padding(40)
-                    Spacer()
+            ScrollView {
+                ForEach(vm.chatlist, id: \.id) { gelen in
+                    ChatPageRow(user: gelen)
+                }
             }
+        }
+        .onAppear {
+            
+            print(vm.chatlist.count)
+           
         }
     }
 }

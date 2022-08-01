@@ -10,12 +10,11 @@ import SwiftUI
 struct PostLargeRowView: View {
     var post: Post
     
-    
     @ObservedObject var vm : PostLargeViewModel
     let imageindex: Int = -1
     let service = Service()
     @State var image: UIImage?
-    
+    @StateObject var homeVm = HomeViewModel()
     init(post: Post){
         self.post = post
         vm = PostLargeViewModel(post: post)
@@ -26,6 +25,7 @@ struct PostLargeRowView: View {
         VStack(alignment: .leading){
             NavigationLink {
                 PostDetailView(post: post).navigationBarHidden(true)
+                    .environmentObject(homeVm)
             } label: {
                 GroupBox(){
                     TabView{

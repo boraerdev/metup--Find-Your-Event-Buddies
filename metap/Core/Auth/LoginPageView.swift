@@ -57,7 +57,13 @@ extension LoginPageView {
             Button {
                 vm.login(email: email, pass: pass)
             } label: {
-                Text("Giriş Yap").padding(.horizontal).foregroundColor(.accentColor).padding()            }.padding()
+                Text("Giriş Yap").padding(.horizontal).foregroundColor(.accentColor).padding()
+                
+            }
+            .alert(isPresented: $vm.anErrorLogin) {
+                    Alert(title: Text("Error"), message: Text(vm.errorMessageLogin ?? "Bilgilerinizi kontrol ediniz."), dismissButton: Alert.Button.default(Text("OK")))
+                }
+            .padding()
 
         }
     }

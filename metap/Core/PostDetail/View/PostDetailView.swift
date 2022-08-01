@@ -6,17 +6,27 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct PostDetailView: View {
     @Environment (\.presentationMode) var presentationMode
     var post: Post
     @EnvironmentObject var envoirement: AuthService
     @ObservedObject var vm : PostDetailViewModel
+    @EnvironmentObject var homeVm : HomeViewModel
     @State var goProfile: Bool = false
+    let userservice = UserService()
+    @State var curUser : User?
     
     init(post: Post){
         self.post = post
         vm = PostDetailViewModel(post: post)
+        var temp : User?
+        self.userservice.fetchuserFromFb(uid: Auth.auth().currentUser?.uid ?? "") { gelen in
+            temp = gelen
+        }
+        self.curUser = temp
+        
     }
     
     
@@ -38,6 +48,8 @@ struct PostDetailView: View {
             messageButton
 
         }
+       
+       
         
         .sheet(isPresented: $goProfile) {
             PersonView(user: vm.user ?? User(email: "", fullname: "", ppUrl: ""))
@@ -60,6 +72,7 @@ extension PostDetailView {
                     ChatView(fromUser: envoirement.userModel, toUser: vm.user).navigationBarHidden(true)
                 } label: {
                     shareButton
+                        
                 }
             }
         }
@@ -184,7 +197,7 @@ extension PostDetailView {
                 .shadow(color: .black.opacity(0.3), radius: 15, x: 0, y: 10)
         )
         .foregroundColor(.accentColor)
-        
+                
     }
 
     

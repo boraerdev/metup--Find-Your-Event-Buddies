@@ -14,8 +14,10 @@ class AuthService: ObservableObject {
     
     @Published var userSession : FirebaseAuth.User?
     @Published var errorMesage: String?
+    @Published var errorMessageLogin: String?
     @Published var anError : Bool = false
     @Published var userModel: User?
+    @Published var anErrorLogin : Bool = false
     
     init(){
         DispatchQueue.main.async {
@@ -25,16 +27,25 @@ class AuthService: ObservableObject {
     }
     
     func logOut(){
-        try? Auth.auth().signOut()
-        self.userModel = nil
-        self.userSession = nil
-        
+        do {
+            self.userModel = nil
+            self.userSession = nil
+            try Auth.auth().signOut()
+            
+        } catch let error {
+            print(error)
+        }
     }
     
     
     func login(email: String, pass: String ){
         Auth.auth().signIn(withEmail: email, password: pass) { result, error in
-            guard error == nil else {return}
+            guard error == nil else {
+                self.errorMessageLogin = error?.localizedDescription
+                self.anErrorLogin.toggle()
+                return
+                
+            }
             guard let user = result?.user else {return}
             self.userSession = user
             self.fetchUser()
@@ -75,14 +86,4 @@ class AuthService: ObservableObject {
             
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

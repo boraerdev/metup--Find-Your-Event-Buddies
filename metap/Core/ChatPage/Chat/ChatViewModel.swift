@@ -13,19 +13,23 @@ import Combine
 
 class ChatViewModel: ObservableObject {
     
-    @Published var messages: [Message] = [Message]()
-    @Published var tmpMessages: [Message] = [Message]()
+    @Published var messages: [Message] = []
+    @Published var tmpMessages: [Message] = []
     private var cancellable = Set<AnyCancellable>()
+    @ObservedObject var chatpageVm = ChatPageViewModel()
     @Published var lastMessageId: String = ""
     @Published var toUser: User?
     @Published var fromUser : User?
     var db = Firestore.firestore()
+    @Published var fromMessages: [Message] = []
+    @Published var toMessages: [Message] = []
+    
+    @Published var chatlist : [User] = []
     
     
-    init(fromUser: User, toUser: User){
-            self.toUser = toUser
-            self.fromUser = fromUser
-        DispatchQueue.main.async {
+    
+    init(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.getMessages()
         }
     }
@@ -37,18 +41,35 @@ class ChatViewModel: ObservableObject {
         
         let fromChatid = "\(fromid)-\(toid)"
         let toChatId = "\(toid)-\(fromid)"
-        DispatchQueue.main.async {
+        
+
+
             self.getFromFrom(fromChatid: fromChatid)
 
-        }
-        DispatchQueue.main.async {
             self.getFromTo(toChatId: toChatId)
 
-        }
-        fetch()
         
+
+        //self.topla(toChatId: toChatId, fromChatid: fromChatid)
         
+            
+            
+            
     }
+    
+    func addToRow(gelen: User?){
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if let user = gelen{
+                if (self.chatlist.firstIndex(where: { $0.id == user.id}) == nil) {
+                    self.chatlist.append(user)
+                    print(self.chatlist.count)
+                }
+            }
+
+        }
+    }
+    
     
     func getFromFrom(fromChatid: String){
         db
@@ -58,68 +79,53 @@ class ChatViewModel: ObservableObject {
                 .addSnapshotListener { guery, error in
                     guard error == nil else {return}
                     guard let docs = guery?.documents else {return}
-                    var temp: [Message] = []
-                    temp = docs.compactMap({ snapshot in
-                        var message =  try? snapshot.data(as: Message.self)
+                    
+                    self.fromMessages = docs.compactMap({ snapshot in
+                        var message = try? snapshot.data(as: Message.self)
                         if message?.fromUid == self.fromUser?.id {
                             message?.received = false
                         }
                         return message
                     })
-                    self.tmpMessages.append(contentsOf: temp)
-                    temp = []
+                    
+                    
+                    self.messages = self.toMessages + self.fromMessages
+                    self.messages.sort { $0.timestamp < $1.timestamp}
+                    if let id = self.messages.last?.id {
+                    self.lastMessageId = id
+                    }
+                    
+                    
                 }
     }
+
+    
     
     func getFromTo(toChatId: String){
         db
-            .collection("messages")
-            .document(toChatId)
-            .collection("chat")
-            .addSnapshotListener { guery, error in
-                guard error == nil else {return}
-                guard let docs = guery?.documents else {return}
-                var temp: [Message] = []
-                temp = docs.compactMap({ snapshot in
-                    var message =  try? snapshot.data(as: Message.self)
-                    
-                    if message?.fromUid == self.toUser?.id {
-                        message?.received = true
+                .collection("messages")
+                .document(toChatId)
+                .collection("chat")
+                .addSnapshotListener { guery, error in
+                    guard error == nil else {return}
+                    guard let docs = guery?.documents else {return}
+                   
+                    self.toMessages = docs.compactMap({ snapshot in
+                        var message = try? snapshot.data(as: Message.self)
+                        if message?.toUid == self.fromUser?.id {
+                            message?.received = true
+                        }
+                        return message
+                    })
+                    self.messages = self.toMessages + self.fromMessages
+                    self.messages.sort { $0.timestamp < $1.timestamp}
+                    if let id = self.messages.last?.id {
+                    self.lastMessageId = id
                     }
-                    
-                    return message
-                })
-                
-                self.tmpMessages.append(contentsOf: temp)
-                temp = []
-                
-            }
+                }
     }
     
-    func fetch(){
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            
-            self.tmpMessages.sort { $0.timestamp < $1.timestamp}
-            self.messages = self.tmpMessages
-            if let id = self.messages.last?.id {
-                self.lastMessageId = id
-            }
-
-        }
-        
-//        self.$tmpMessages
-//            .sink { [weak self] gelen in
-//                let new = gelen.sorted { $0.timestamp < $1.timestamp }
-//                self?.messages = new
-//                if let id = self?.messages.last?.id {
-//                                self?.lastMessageId = id
-//                            }
-//            }
-//            .store(in: &cancellable)
-
-        
-    }
+    
     
     func sendMessage(text: String, toUid: String, fromUid: String){
         let id = UUID().uuidString
@@ -131,13 +137,7 @@ class ChatViewModel: ObservableObject {
             .collection("chat")
             .document()
             .setData(data) { error in
-//            self.tmpMessages = []
-//            self.messages = []
-            
         }
     }
-    
-    
-    
-    
+
 }

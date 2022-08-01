@@ -29,8 +29,10 @@ extension FieldView{
         VStack{
             if isPassword {
                 SecureField(title, text: $bindingVar)
+                    .disableAutocorrection(true)
             } else {
                 TextField(title, text: $bindingVar)
+                    .disableAutocorrection(true)
             }
         }
     }

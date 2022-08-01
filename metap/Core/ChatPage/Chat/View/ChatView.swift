@@ -10,28 +10,27 @@ import Combine
 
 struct ChatView: View {
     
-    @StateObject var chatVm : ChatViewModel
-    @EnvironmentObject var auth: AuthService
+    @EnvironmentObject var auth : AuthService
     @Environment (\.presentationMode) var presentationMode
     @State var allMessages : [Message] = []
     @State var cancellable = Set<AnyCancellable>()
-
+    @StateObject var chatVm = ChatViewModel()
     @State var message: String = ""
     let toUser: User?
-    let fromUser : User?
+    @State var fromUser : User?
+    @ObservedObject var homeVm = HomeViewModel()
     
     
     init(fromUser: User? , toUser: User?){
         self.toUser = toUser
         self.fromUser = fromUser
-        _chatVm = StateObject<ChatViewModel>(wrappedValue: ChatViewModel(fromUser: fromUser!, toUser: toUser!))
     }
     
     var body: some View {
         ZStack{
             Color.blue.ignoresSafeArea()
             VStack(spacing:0){
-                nav
+                nav.padding(.vertical,5)
                 userView.padding()
                 VStack{
                     messageScroll
@@ -41,6 +40,14 @@ struct ChatView: View {
                 .background(RoundedRectangle(cornerRadius: 10).fill(.white))
             }.edgesIgnoringSafeArea(.bottom)
         }
+        .onAppear {
+            DispatchQueue.main.async {
+                self.chatVm.fromUser = self.homeVm.user
+                self.chatVm.toUser = self.toUser
+            }
+            
+        }
+        
        
        
     }
@@ -99,15 +106,12 @@ extension ChatView {
             .padding(.horizontal)
             .padding(.bottom,40)
             .onSubmit {
-                withAnimation(.easeInOut) {
-                    guard let tuuid = toUser?.id else {
-                    return
-                }
-                    guard let authUid = fromUser?.id else {return}
+                guard let tuuid = chatVm.toUser?.id else {return print("tuuid alınamadı")}
+                guard let authUid = chatVm.fromUser?.id else {return print("froumuid alınamadı")}
+                chatVm.sendMessage(text: message, toUid: tuuid , fromUid: authUid)
+                message = ""
+
                 
-                chatVm.sendMessage(text: message, toUid: tuuid , fromUid: authUid)                
-            }
-            message = ""
         }
     }
     
@@ -119,14 +123,7 @@ extension ChatView {
                 }
             }.padding(.vertical,8)
             .onChange(of: chatVm.lastMessageId) { id in
-                
-                
-                
-                chatVm.$lastMessageId
-                    .sink { _ in
-                            proxy.scrollTo(id, anchor: .bottom)
-                        
-                    }.store(in: &cancellable)
+                proxy.scrollTo(id, anchor: .bottom)
                 }
         }
 

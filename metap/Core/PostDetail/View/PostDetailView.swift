@@ -35,8 +35,10 @@ struct PostDetailView: View {
                     
                 }
             }
-            shareButton
+            messageButton
+
         }
+        
         .sheet(isPresented: $goProfile) {
             PersonView(user: vm.user ?? User(email: "", fullname: "", ppUrl: ""))
         }
@@ -50,6 +52,18 @@ struct PostDetailView: View {
 //}
 
 extension PostDetailView {
+    
+    private var messageButton: some View {
+        VStack{
+            if vm.user != envoirement.userModel {
+                NavigationLink {
+                    ChatView(fromUser: envoirement.userModel, toUser: vm.user).navigationBarHidden(true)
+                } label: {
+                    shareButton
+                }
+            }
+        }
+    }
     
     private var trashImagine: some View {
         VStack{

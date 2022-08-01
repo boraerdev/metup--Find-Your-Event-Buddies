@@ -21,8 +21,6 @@ class AuthService: ObservableObject {
         DispatchQueue.main.async {
             self.userSession = Auth.auth().currentUser
             self.fetchUser()
-            
-
         }
     }
     

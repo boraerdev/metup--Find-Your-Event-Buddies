@@ -18,6 +18,14 @@ struct Service {
         }
     }
     
+    func downloadAsyncImage(url: String, complation: @escaping (UIImage?)-> Void) async throws  {
+        guard let strictUrl = URL(string: url) else {return}
+        let (data, _) = try await URLSession.shared.data(from: strictUrl)
+        if let image = UIImage(data: data) {
+            complation(image)
+        }
+    }
+    
     func uploadImage( image: UIImage, path: String, completion: @escaping (String)->Void) {
         
         guard let data = image.jpegData(compressionQuality: 0.3) else {return}

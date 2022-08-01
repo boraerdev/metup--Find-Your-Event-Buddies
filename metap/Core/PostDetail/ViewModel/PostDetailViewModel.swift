@@ -14,6 +14,7 @@ class PostDetailViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var user: User? = nil
     
+    
     init(post: Post){
         self.fetchData(post: post)
     }
@@ -31,6 +32,7 @@ class PostDetailViewModel: ObservableObject {
             }
         }
     }
+    
     
     func deleteImage(post: Post) {
         Storage.storage().reference(forURL: post.imageUrl).delete { error in

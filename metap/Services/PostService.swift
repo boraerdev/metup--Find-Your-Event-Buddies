@@ -15,7 +15,7 @@ struct PostService {
     
     func fetchAllPosts(completion: @escaping ([Post])->Void){
         
-        Firestore.firestore().collection("posts").getDocuments { querySnapshots, error in
+        Firestore.firestore().collection("posts").order(by: "tarih", descending: true).addSnapshotListener { querySnapshots, error in
             var allPost: [Post] = []
             guard error == nil else {return}
             guard let snapshot = querySnapshots else {return}

@@ -12,6 +12,9 @@ struct PostLargeRowView: View {
     
     
     @ObservedObject var vm : PostLargeViewModel
+    let imageindex: Int = -1
+    let service = Service()
+    @State var image: UIImage?
     
     init(post: Post){
         self.post = post
@@ -37,32 +40,36 @@ struct PostLargeRowView: View {
                             }
                         }
                         HStack{
-                            
-                            AsyncImage(url: URL(string: post.imageUrl)) { image in
-                                image
-                                    .resizable()
-                                    .cornerRadius(20)
-                                    .scaledToFill()
-
-                            } placeholder: {
-                                ProgressView()
+//                            AsyncImage(url: URL(string: post.imageUrl)) { image in
+//                                image
+//                                    .resizable()
+//                                    .cornerRadius(20)
+//                                    .scaledToFill()
+//
+//                            } placeholder: {
+//                                ProgressView()
+//                            }
+                            VStack{
+                                if let image = image {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFill()
+                                }
                             }
-
-                            
-                            
-                                
                         }
                     }.cornerRadius(5)
                     
                     .frame(height:150)
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    
-                    
                 }
             }
-
-            
-            
+        }
+        .task {
+            async{
+                try await service.downloadAsyncImage(url: post.imageUrl) { gelen in
+                    self.image = gelen
+                }
+            }
         }
     }
 }

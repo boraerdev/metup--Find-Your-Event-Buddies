@@ -9,8 +9,7 @@ import SwiftUI
 import Combine
 
 struct ChatPageView: View {
-    @StateObject var vm = ChatViewModel()
-    @State var chats: [User] = []
+    @StateObject var vm = ChatPageViewModel()
     @State var cancellable = Set<AnyCancellable>()
     init(){
       
@@ -18,17 +17,25 @@ struct ChatPageView: View {
     
     var body: some View {
         VStack{
+            HStack{
+                Image(systemName: "info")
+                Text("Kullacıların eşsiz ID'lerini isimlerinin altında görebilirsin. Kimseyle özel bilgilerini paylaşmaman gerektiğini unutma!")
+
+            }
+            .foregroundColor(.secondary).font(.footnote).padding()
             ScrollView {
-                ForEach(vm.chatlist, id: \.id) { gelen in
-                    ChatPageRow(user: gelen)
+                ForEach(vm.chats, id: \.id) { gelen in
+                    NavigationLink {
+                        ChatView(fromUser: vm.curUser, toUser: gelen).navigationBarHidden(true)
+                    } label: {
+                        ChatPageRow(user: gelen).padding([.horizontal, .bottom])
+                    }
+
+                        
                 }
             }
         }
-        .onAppear {
-            
-            print(vm.chatlist.count)
-           
-        }
+        
     }
 }
 

@@ -11,27 +11,32 @@ struct ChatPageRow: View {
     let user: User
     var body: some View {
         VStack{
-            HStack{
-                AsyncImage(url: URL(string: user.ppUrl)!) { image in
-                    image.resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                } placeholder: {
-                    ProgressView()
-                        .frame(width: 50, height: 50)
+            GroupBox(){
+                VStack{
+                    HStack{
+                        AsyncImage(url: URL(string: user.ppUrl)!) { image in
+                            image.resizable()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            ProgressView()
+                                .frame(width: 50, height: 50)
+                                
+
+                        }
+
                         
-
+                        
+                        VStack(alignment: .leading){
+                            Text(user.fullname).bold()
+                            Text(user.id!).lineLimit(2)
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
+                        Spacer()
+                    }
                 }
 
-                
-                
-                VStack(alignment: .leading){
-                    Text("Bora Erdem").bold()
-                    Text("Son mesaj bu olacak gibi görünüyor bakalım ama  nasıl olacak bir kirim ypk").lineLimit(2)
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
-                Spacer()
             }
         }
     }

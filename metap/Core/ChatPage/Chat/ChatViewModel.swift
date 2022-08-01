@@ -57,18 +57,7 @@ class ChatViewModel: ObservableObject {
             
     }
     
-    func addToRow(gelen: User?){
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let user = gelen{
-                if (self.chatlist.firstIndex(where: { $0.id == user.id}) == nil) {
-                    self.chatlist.append(user)
-                    print(self.chatlist.count)
-                }
-            }
-
-        }
-    }
     
     
     func getFromFrom(fromChatid: String){
@@ -138,6 +127,24 @@ class ChatViewModel: ObservableObject {
             .document()
             .setData(data) { error in
         }
+        
+        db.collection("users")
+            .document(fromUid)
+            .collection("chats")
+            .document(toUid)
+            .setData(["id":toUid]) { error in
+                
+            }
+        
+        db.collection("users")
+            .document(toUid)
+            .collection("chats")
+            .document(fromUid)
+            .setData(["id": fromUid]) { error in
+                
+            }
+        
+        
     }
 
 }

@@ -77,7 +77,7 @@ extension ChatView {
                     .font(.title2)
                     .bold()
                 .foregroundColor(.white)
-                Text(toUser?.email.split(separator: "@")[0] ?? "")
+                Text("@" + (toUser?.email.split(separator: "@")[0] ?? ""))
                     .foregroundColor(.white)
                     .font(.subheadline)
             }

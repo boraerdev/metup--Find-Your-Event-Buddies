@@ -3,7 +3,7 @@
 
 - 💬 Ask me about **Swift, SwitUI**
 
-- 📫 How to reach me **boraerdev@mail.com**
+- 📫 How to reach me **boraerdev@gmail.com**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">

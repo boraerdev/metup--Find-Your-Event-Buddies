@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A184CE6289852D1005501AA /* ChatPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A184CE5289852D1005501AA /* ChatPageViewModel.swift */; };
 		0A184CE8289854CB005501AA /* ChatPageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A184CE7289854CB005501AA /* ChatPageRow.swift */; };
+		0A1D770428994A7400FC4DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D770328994A7400FC4DDB /* GoogleService-Info.plist */; };
 		0A99E5032892C1D800FFB11B /* metapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99E5022892C1D800FFB11B /* metapApp.swift */; };
 		0A99E5052892C1D800FFB11B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99E5042892C1D800FFB11B /* ContentView.swift */; };
 		0A99E5072892C1D900FFB11B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A99E5062892C1D900FFB11B /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		0A184CE5289852D1005501AA /* ChatPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPageViewModel.swift; sourceTree = "<group>"; };
 		0A184CE7289854CB005501AA /* ChatPageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPageRow.swift; sourceTree = "<group>"; };
+		0A1D770328994A7400FC4DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A99E4FF2892C1D800FFB11B /* metap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = metap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A99E5022892C1D800FFB11B /* metapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = metapApp.swift; sourceTree = "<group>"; };
 		0A99E5042892C1D800FFB11B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				0A99E5022892C1D800FFB11B /* metapApp.swift */,
 				0A99E5042892C1D800FFB11B /* ContentView.swift */,
 				0A99E5062892C1D900FFB11B /* Assets.xcassets */,
+				0A1D770328994A7400FC4DDB /* GoogleService-Info.plist */,
 				0A99E5082892C1D900FFB11B /* Preview Content */,
 			);
 			path = metap;
@@ -496,6 +499,7 @@
 			files = (
 				0A99E50A2892C1D900FFB11B /* Preview Assets.xcassets in Resources */,
 				0A99E5072892C1D900FFB11B /* Assets.xcassets in Resources */,
+				0A1D770428994A7400FC4DDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

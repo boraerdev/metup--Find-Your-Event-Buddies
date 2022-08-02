@@ -28,7 +28,7 @@ struct ChatPageView: View {
                     NavigationLink {
                         ChatView(fromUser: vm.curUser, toUser: gelen).navigationBarHidden(true)
                     } label: {
-                        ChatPageRow(user: gelen).padding([.horizontal, .bottom])
+                        ChatPageRow(user: gelen).padding(.horizontal).padding(.bottom,8)
                     }
 
                         

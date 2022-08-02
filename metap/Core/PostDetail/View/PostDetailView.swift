@@ -48,9 +48,6 @@ struct PostDetailView: View {
             messageButton
 
         }
-       
-       
-        
         .sheet(isPresented: $goProfile) {
             PersonView(user: vm.user ?? User(email: "", fullname: "", ppUrl: ""))
         }

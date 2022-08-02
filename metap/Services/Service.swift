@@ -45,19 +45,7 @@ struct Service {
                     let urlString = url.absoluteString
                     completion(urlString)
                 }
-                    
             }
-            
         }
-        
-        
-        
     }
-    
-    func uploadPost (etkinlikAdi: String,etkinlikAciklamasi: String,etkinlikAdresi: String,kacSaatIcinde: Int, kacKisilik: Int) {
-        
-    }
-    
-    
-    
 }

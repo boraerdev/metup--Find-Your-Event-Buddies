@@ -28,11 +28,8 @@ struct AddPageView: View {
                 ScrollView ( showsIndicators: false) {
                     
                     FieldView(isPassword: false, title: "Etkinlik Adı", bindingVar: $etkinlikAdi)
-                    
                     FieldView(isPassword: false, title: "Etkinlik Adresi", bindingVar: $etkinlikAdresi)
-
                     TextEditorView(title: "Etkinlik Açıklaması", gelen: $etkinlikAciklamasi)
-                    
                     pickerView(title: "Etkinlik Kaç Saat İçinde Olacak? ", bind: $kacSaatIcinde)
                     pickerView(title: "Etkinlik Kaç Kişilik Olacak? ", bind: $kacKisilik)
                     
@@ -40,12 +37,8 @@ struct AddPageView: View {
                         .onTapGesture {
                             showSheet = true
                         }
-
-                    
                 }.padding()
-                
                 shareButton
-                
             }
             .sheet(isPresented: $showSheet) {
                     ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)

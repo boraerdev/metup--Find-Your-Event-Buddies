@@ -19,14 +19,10 @@ class ChatPageViewModel: ObservableObject{
     init(){
         self.fetchUser()
         self.fetchMessages()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            print(self.list)
-        }
     }
     
-    
     func fetchMessages(){
-        guard let authUser = Auth.auth().currentUser else {return print("hata var QQQ")}
+        guard let authUser = Auth.auth().currentUser else {return print("hata var")}
         db
             .collection("users")
             .document(authUser.uid)
@@ -40,13 +36,7 @@ class ChatPageViewModel: ObservableObject{
                     }
                     return gelenUser
                 })
-                
-                }
-                
-                
-            
-        
-        
+        }
     }
     
     func fetchUser(){
@@ -55,12 +45,4 @@ class ChatPageViewModel: ObservableObject{
             self?.curUser = user
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }

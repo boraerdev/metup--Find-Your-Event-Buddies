@@ -44,7 +44,7 @@ extension PersonView {
             Divider()
             ScrollView{
                 ForEach(personVm.personsPosts) { gelen in
-                    PostLargeRowView(post: gelen).padding([.bottom, .horizontal])
+                    PostLargeRowView(post: gelen).padding(.horizontal).padding(.bottom,8)
                 }
             }
         }

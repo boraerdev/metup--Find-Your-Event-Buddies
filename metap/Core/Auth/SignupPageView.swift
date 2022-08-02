@@ -32,13 +32,6 @@ struct SignupPageView: View {
                 registerButton
                 
                 }
-            
-            
-            
-
-                
-                
-                
             Spacer()
             HStack{
                 Text("Hesabın var mı?").foregroundColor(.secondary)
@@ -47,20 +40,13 @@ struct SignupPageView: View {
                 } label: {
                     Text("Giriş Yap").foregroundColor(.accentColor)
                     }
-
-                    
-                    
                 }
             }
         .padding(.horizontal)
         .sheet(isPresented: $showSheet) {
                     ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
-            
         }
     }
-    
-    
-
 }
 
 
@@ -74,6 +60,8 @@ struct SignupPageView_Previews: PreviewProvider {
 
 extension SignupPageView{
     
+    //MARK: Funcs
+    
     private func register() {
         guard fullName != "" && pass != "" && email != "" && image != nil else {
             vm.anError.toggle()
@@ -81,6 +69,8 @@ extension SignupPageView{
         }
         vm.register(fullName: fullName, email: email, pass: pass, image: image)
     }
+    
+    //MARK: Views
     
     private var registerButton: some View {
         Button {

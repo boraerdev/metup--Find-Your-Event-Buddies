@@ -8,9 +8,6 @@
 import Foundation
 import Firebase
 
-
-
-
 struct PostService {
     
     func fetchAllPosts(completion: @escaping ([Post])->Void){
